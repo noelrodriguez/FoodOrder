@@ -5,11 +5,11 @@ using System.Web;
 
 namespace FoodOrder.Models
 {
-    public class Ingredients
+    public class Ingredient
     {
-        public int IngredientsID { get; set; }
+        public int IngredientID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public enum Option { NORMAL, NONE, LOW }
+        public Option Option { get; set; }
     }
 }

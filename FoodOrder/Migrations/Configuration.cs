@@ -10,7 +10,6 @@ namespace FoodOrder.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "FoodOrder.Data_Access.ApplicationDbContext";
         }
 
         protected override void Seed(FoodOrder.Data_Access.ApplicationDbContext context)

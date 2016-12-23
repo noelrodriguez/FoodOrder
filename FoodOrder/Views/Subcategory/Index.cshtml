@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FoodOrder.Models.Category>
+﻿@model IEnumerable<FoodOrder.Models.Subcategory>
 
 @{
     ViewBag.Title = "Index";
@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            Category
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -23,15 +26,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink("Sub", "Index", "Subcategory", new { id = item.CategoryID }, null)
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.SubcategoryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SubcategoryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SubcategoryID })
         </td>
     </tr>
 }

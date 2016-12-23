@@ -19,7 +19,7 @@ namespace FoodOrder.Controllers
         public ActionResult Index(int id)
         {
             List<Subcategory> Subcategories = db.Subcategory.Include(s => s.Category).
-                Where(x => x.Category.CategoryID == id).ToList();
+                Where(x => x.Category.Id == id).ToList();
             if (Subcategories == null)
             {
                 return HttpNotFound();
@@ -45,7 +45,7 @@ namespace FoodOrder.Controllers
         // GET: Subcategory/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "Name");
+            ViewBag.CategoryID = new SelectList(db.Category, "CategoryId", "Name");
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace FoodOrder.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubcategoryID,CategoryID,Name,Description")] Subcategory subcategory)
+        public ActionResult Create([Bind(Include = "SubcategoryId,CategoryId,Name,Description")] Subcategory subcategory)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace FoodOrder.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "Name", subcategory.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Category, "CategoryId", "Name", subcategory.CategoryId);
             return View(subcategory);
         }
 
@@ -79,7 +79,7 @@ namespace FoodOrder.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "Name", subcategory.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Category, "CategoryId", "Name", subcategory.CategoryId);
             return View(subcategory);
         }
 
@@ -88,7 +88,7 @@ namespace FoodOrder.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SubcategoryID,CategoryID,Name,Description")] Subcategory subcategory)
+        public ActionResult Edit([Bind(Include = "SubcategoryId,CategoryId,Name,Description")] Subcategory subcategory)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace FoodOrder.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "Name", subcategory.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Category, "CategoryId", "Name", subcategory.CategoryId);
             return View(subcategory);
         }
 

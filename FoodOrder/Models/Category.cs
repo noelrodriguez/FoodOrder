@@ -7,7 +7,7 @@ namespace FoodOrder.Models
 {
     public class Category
     {
-        public int CategoryID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Subcategory> Subcategories { get; set; }

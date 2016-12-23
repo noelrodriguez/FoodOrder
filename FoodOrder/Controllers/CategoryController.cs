@@ -47,7 +47,7 @@ namespace FoodOrder.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,Name,Description")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryId,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace FoodOrder.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,Name,Description")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryId,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {

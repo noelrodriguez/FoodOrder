@@ -5,13 +5,12 @@ using System.Web;
 
 namespace FoodOrder.Models
 {
-    public class Subcategory
+    public class Order
     {
         public int Id { get; set; }
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public ApplicationUser User { get; set; }
         public List<MenuItem> MenuItems { get; set; }
+        public double TotalPrice { get; set; }
+        public Status Status { get; set; }
     }
 }

@@ -29,16 +29,16 @@ namespace FoodOrder.Migrations
 
             context.Subcategory.AddOrUpdate(
                 p => p.Name,
-                new Models.Subcategory { Name = "Finger Food", CategoryId = 9 },
-                new Models.Subcategory { Name = "Small Serving", CategoryId = 9 },
-                new Models.Subcategory { Name = "Burgers", CategoryId = 10 },
-                new Models.Subcategory { Name = "Soups", CategoryId = 10 },
-                new Models.Subcategory { Name = "Pie", CategoryId = 11 },
-                new Models.Subcategory { Name = "Cake", CategoryId = 11 },
-                new Models.Subcategory { Name = "Espresso", CategoryId = 12 },
-                new Models.Subcategory { Name = "Soda", CategoryId = 12 }
+                new Models.Subcategory { Name = "Finger Food", CategoryId = 5 },
+                new Models.Subcategory { Name = "Small Serving", CategoryId = 5 },
+                new Models.Subcategory { Name = "Burgers", CategoryId = 6 },
+                new Models.Subcategory { Name = "Soups", CategoryId = 6 },
+                new Models.Subcategory { Name = "Pie", CategoryId = 7 },
+                new Models.Subcategory { Name = "Cake", CategoryId = 7 },
+                new Models.Subcategory { Name = "Espresso", CategoryId = 8 },
+                new Models.Subcategory { Name = "Soda", CategoryId = 8 }
             );
-
+            
             context.MenuItem.AddOrUpdate(
                 p => p.Name,
                 new Models.MenuItem { Name = "Mozarella Sticks", SubcategoryId = 2, Description = "A", Price = 5.0 },

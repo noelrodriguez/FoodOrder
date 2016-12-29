@@ -16,15 +16,10 @@ namespace FoodOrder.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: MenuItem
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            List<MenuItem> MenuItems = db.MenuItem.Include(s => s.Subcategory).
-                Where(x => x.Subcategory.Id == id).ToList();
-            if (MenuItems == null)
-            {
-                return HttpNotFound();
-            }
-            return View(MenuItems);
+            var menuItem = db.MenuItem.Include(m => m.Subcategory);
+            return View(menuItem.ToList());
         }
 
         // GET: MenuItem/Details/5
@@ -45,7 +40,7 @@ namespace FoodOrder.Controllers
         // GET: MenuItem/Create
         public ActionResult Create()
         {
-            ViewBag.SubcategoryID = new SelectList(db.Subcategory, "SubcategoryId", "Name");
+            ViewBag.SubcategoryId = new SelectList(db.Subcategory, "Id", "Name");
             return View();
         }
 
@@ -54,7 +49,7 @@ namespace FoodOrder.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MenuItemID,SubcategoryId,Name,Price,Description,Size")] MenuItem menuItem)
+        public ActionResult Create([Bind(Include = "Id,SubcategoryId,Name,Price,Description,Size")] MenuItem menuItem)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +58,7 @@ namespace FoodOrder.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SubcategoryID = new SelectList(db.Subcategory, "SubcategoryId", "Name", menuItem.SubcategoryId);
+            ViewBag.SubcategoryId = new SelectList(db.Subcategory, "Id", "Name", menuItem.SubcategoryId);
             return View(menuItem);
         }
 
@@ -79,7 +74,7 @@ namespace FoodOrder.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SubcategoryID = new SelectList(db.Subcategory, "SubcategoryId", "Name", menuItem.SubcategoryId);
+            ViewBag.SubcategoryId = new SelectList(db.Subcategory, "Id", "Name", menuItem.SubcategoryId);
             return View(menuItem);
         }
 
@@ -88,7 +83,7 @@ namespace FoodOrder.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MenuItemID,SubcategoryId,Name,Price,Description,Size")] MenuItem menuItem)
+        public ActionResult Edit([Bind(Include = "Id,SubcategoryId,Name,Price,Description,Size")] MenuItem menuItem)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +91,7 @@ namespace FoodOrder.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SubcategoryID = new SelectList(db.Subcategory, "SubcategoryId", "Name", menuItem.SubcategoryId);
+            ViewBag.SubcategoryId = new SelectList(db.Subcategory, "Id", "Name", menuItem.SubcategoryId);
             return View(menuItem);
         }
 

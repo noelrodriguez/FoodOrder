@@ -16,10 +16,12 @@ namespace FoodOrder.Migrations
                         Name = c.String(),
                         Price = c.Double(nullable: false),
                         Description = c.String(),
+                        MenuItem_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Subcategories", t => t.SubcategoryId, cascadeDelete: true)
-                .Index(t => t.SubcategoryId);
+                .Index(t => t.SubcategoryId)
+                .Index(t => t.MenuItem_Id);
             
             CreateTable(
                 "dbo.Subcategories",
@@ -48,14 +50,14 @@ namespace FoodOrder.Migrations
                 "dbo.MenuItems",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         SubcategoryId = c.Int(nullable: false),
                         Name = c.String(),
                         Price = c.Double(nullable: false),
                         Description = c.String(),
                         Size = c.Int(),
                     })
-                .PrimaryKey(t => t.ID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Subcategories", t => t.SubcategoryId, cascadeDelete: true)
                 .Index(t => t.SubcategoryId);
             
@@ -92,24 +94,24 @@ namespace FoodOrder.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-
+            
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
-                {
-                    Id = c.String(nullable: false, maxLength: 128),
-                    Email = c.String(maxLength: 256),
-                    EmailConfirmed = c.Boolean(nullable: false),
-                    PasswordHash = c.String(),
-                    SecurityStamp = c.String(),
-                    PhoneNumber = c.String(),
-                    PhoneNumberConfirmed = c.Boolean(nullable: false),
-                    TwoFactorEnabled = c.Boolean(nullable: false),
-                    LockoutEndDateUtc = c.DateTime(),
-                    LockoutEnabled = c.Boolean(nullable: false),
-                    AccessFailedCount = c.Int(nullable: false),
-                    UserName = c.String(nullable: false, maxLength: 256),
-                })
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
+                    })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
@@ -148,7 +150,7 @@ namespace FoodOrder.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AddOns", "SubcategoryId", "dbo.Subcategories");
             DropForeignKey("dbo.MenuItems", "SubcategoryId", "dbo.Subcategories");
-            DropForeignKey("dbo.AddOns", "MenuItem_ID", "dbo.MenuItems");
+            DropForeignKey("dbo.AddOns", "MenuItem_Id", "dbo.MenuItems");
             DropForeignKey("dbo.Subcategories", "CategoryId", "dbo.Categories");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -158,7 +160,7 @@ namespace FoodOrder.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.MenuItems", new[] { "SubcategoryId" });
             DropIndex("dbo.Subcategories", new[] { "CategoryId" });
-            DropIndex("dbo.AddOns", new[] { "MenuItem_ID" });
+            DropIndex("dbo.AddOns", new[] { "MenuItem_Id" });
             DropIndex("dbo.AddOns", new[] { "SubcategoryId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

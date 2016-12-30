@@ -21,20 +21,29 @@ namespace FoodOrder.Migrations
             //  to avoid creating duplicate seed data. E.g.
             //
 
-            Models.Category Category = new Models.Category();
-            Category.Name = "Appetizer";
-            Category.Description = "Smaller Servings";
+            /*Models.MenuItem CowboyBurger = new Models.MenuItem()
+            {
+                Name = "Cowboy Burger",
+                Description = "...",
+                Price = 9.99
+            };
 
-            List<Models.Subcategory> Subcategories = new List<Models.Subcategory>();
-            Subcategories.Add(new Models.Subcategory { Name = "Sides" });
-            Subcategories.Add(new Models.Subcategory { Name = "Finger Food" });
-            Category.Subcategories = Subcategories;
+            
+
+            Models.Category Appetizer = new Models.Category();
+            Appetizer.Name = "Appetizer";
+            Appetizer.Description = "Smaller Servings";
+
+            List<Models.Subcategory> AppSubcat = new List<Models.Subcategory>();
+            AppSubcat.Add(new Models.Subcategory { Name = "Sides" });
+            AppSubcat.Add(new Models.Subcategory { Name = "Finger Food" });
+            Appetizer.Subcategories = AppSubcat;
 
             context.Category.AddOrUpdate(p => p.Name,
-                Category);
+                Appetizer);
 
 
-            /*context.Category.AddOrUpdate(
+            context.Category.AddOrUpdate(
                 p => p.Name,
                 new Models.Category { Name = "Appetizer", Description = "Finger Food" },
                 new Models.Category { Name = "Entree", Description = "Main Dish" },

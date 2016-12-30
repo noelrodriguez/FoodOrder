@@ -7,8 +7,8 @@ namespace FoodOrder.Models
 {
     public enum Option
     {
-        NORMAL,
-        NONE,
-        LOW
+        Normal,
+        None,
+        Low
     }
 }

@@ -7,10 +7,10 @@ namespace FoodOrder.Models
 {
     public enum Status
     {
-        CART,
-        RECEIVED,
-        IN_PROGRESS,
-        PICK_UP,
-        COMPLETED
+        Cart,
+        Received,
+        In_Progress,
+        Pick_Up,
+        Completed
     }
 }

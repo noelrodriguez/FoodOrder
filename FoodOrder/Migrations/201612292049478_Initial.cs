@@ -12,29 +12,30 @@ namespace FoodOrder.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        SubcategoryId = c.Int(nullable: false),
                         Name = c.String(),
-                        Price = c.Double(nullable: false),
                         Description = c.String(),
+                        Price = c.Double(nullable: false),
                         MenuItem_Id = c.Int(),
+                        Subcategory_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Subcategories", t => t.SubcategoryId, cascadeDelete: true)
-                .Index(t => t.SubcategoryId)
-                .Index(t => t.MenuItem_Id);
+                .ForeignKey("dbo.MenuItems", t => t.MenuItem_Id)
+                .ForeignKey("dbo.Subcategories", t => t.Subcategory_Id)
+                .Index(t => t.MenuItem_Id)
+                .Index(t => t.Subcategory_Id);
             
             CreateTable(
                 "dbo.Subcategories",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CategoryId = c.Int(nullable: false),
                         Name = c.String(),
                         Description = c.String(),
+                        Category_Id = c.Int(), 
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .Index(t => t.CategoryId);
+                .ForeignKey("dbo.Categories", t => t.Category_Id)
+                .Index(t => t.Category_Id);
             
             CreateTable(
                 "dbo.Categories",
@@ -51,15 +52,19 @@ namespace FoodOrder.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        SubcategoryId = c.Int(nullable: false),
                         Name = c.String(),
-                        Price = c.Double(nullable: false),
                         Description = c.String(),
+                        Price = c.Double(nullable: false),
+                        ItemImage = c.Binary(),
                         Size = c.Int(),
+                        Subcategory_Id = c.Int(),
+                        Order_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Subcategories", t => t.SubcategoryId, cascadeDelete: true)
-                .Index(t => t.SubcategoryId);
+                .ForeignKey("dbo.Subcategories", t => t.Subcategory_Id)
+                .ForeignKey("dbo.Orders", t => t.Order_Id)
+                .Index(t => t.Subcategory_Id)
+                .Index(t => t.Order_Id);
             
             CreateTable(
                 "dbo.Ingredients",
@@ -69,31 +74,24 @@ namespace FoodOrder.Migrations
                         Name = c.String(),
                         Description = c.String(),
                         Option = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
+                        MenuItem_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+                .ForeignKey("dbo.MenuItems", t => t.MenuItem_Id)
+                .Index(t => t.MenuItem_Id);
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.Orders",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        Id = c.Int(nullable: false, identity: true),
+                        TotalPrice = c.Double(nullable: false),
+                        Status = c.Int(nullable: false),
+                        User_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -140,33 +138,63 @@ namespace FoodOrder.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Orders", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.AddOns", "SubcategoryId", "dbo.Subcategories");
-            DropForeignKey("dbo.MenuItems", "SubcategoryId", "dbo.Subcategories");
+            DropForeignKey("dbo.MenuItems", "Order_Id", "dbo.Orders");
+            DropForeignKey("dbo.AddOns", "Subcategory_Id", "dbo.Subcategories");
+            DropForeignKey("dbo.MenuItems", "Subcategory_Id", "dbo.Subcategories");
+            DropForeignKey("dbo.Ingredients", "MenuItem_Id", "dbo.MenuItems");
             DropForeignKey("dbo.AddOns", "MenuItem_Id", "dbo.MenuItems");
-            DropForeignKey("dbo.Subcategories", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Subcategories", "Category_Id", "dbo.Categories");
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.MenuItems", new[] { "SubcategoryId" });
-            DropIndex("dbo.Subcategories", new[] { "CategoryId" });
+            DropIndex("dbo.Orders", new[] { "User_Id" });
+            DropIndex("dbo.Ingredients", new[] { "MenuItem_Id" });
+            DropIndex("dbo.MenuItems", new[] { "Order_Id" });
+            DropIndex("dbo.MenuItems", new[] { "Subcategory_Id" });
+            DropIndex("dbo.Subcategories", new[] { "Category_Id" });
+            DropIndex("dbo.AddOns", new[] { "Subcategory_Id" });
             DropIndex("dbo.AddOns", new[] { "MenuItem_Id" });
-            DropIndex("dbo.AddOns", new[] { "SubcategoryId" });
+            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Orders");
             DropTable("dbo.Ingredients");
             DropTable("dbo.MenuItems");
             DropTable("dbo.Categories");

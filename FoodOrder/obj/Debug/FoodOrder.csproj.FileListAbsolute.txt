@@ -1,4 +1,3 @@
-C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.csprojResolveAssemblyReference.cache
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\bin\roslyn\csc.exe
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -65,7 +64,8 @@ C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\bi
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.dll
-C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.pdb
+C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.csprojResolveAssemblyReference.cache
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.Migrations.Initial.resources
 C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.csproj.GenerateResource.Cache
+C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.dll
+C:\Users\rodrigueno\Documents\Visual Studio 2015\Projects\FoodOrder\FoodOrder\obj\Debug\FoodOrder.pdb

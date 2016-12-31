@@ -21,6 +21,7 @@ namespace FoodOrder.Migrations
             //  to avoid creating duplicate seed data. E.g.
             //
 
+
             /*Models.MenuItem CowboyBurger = new Models.MenuItem()
             {
                 Name = "Cowboy Burger",

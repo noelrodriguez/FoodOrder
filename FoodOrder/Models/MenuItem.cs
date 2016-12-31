@@ -18,9 +18,9 @@ namespace FoodOrder.Models
         public Subcategory Subcategory { get; set; }
         public byte[] ItemImage { get; set; }
         public Size? Size { get; set; }
-        [Required]
         public List<AddOn> AddOns { get; set; }
         [Required]
         public List<Ingredient> Ingredients { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

@@ -13,6 +13,10 @@ namespace FoodOrder.Models
         public string Description { get; set; }
         [Required]
         public double Price { get; set; }
+        [Required]
+        [Display(Name = "Subcategory")]
+        public int SubcategoryId { get; set; }
+        public Subcategory Subcategory { get; set; }
         public List<MenuItem> MenuItems { get; set; }
     }
 }

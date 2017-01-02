@@ -12,7 +12,10 @@ namespace FoodOrder.Models
         public string Name { get; set; }
         public string Description { get; set; }
         [Required]
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<MenuItem> MenuItems { get; set; }
+        public List<AddOn> AddOns { get; set; }
     }
 }

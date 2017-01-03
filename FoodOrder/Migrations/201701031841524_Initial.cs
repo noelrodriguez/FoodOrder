@@ -18,7 +18,7 @@ namespace FoodOrder.Migrations
                         SubcategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Subcategories", t => t.SubcategoryId)
+                .ForeignKey("dbo.Subcategories", t => t.SubcategoryId, cascadeDelete: true)
                 .Index(t => t.SubcategoryId);
             
             CreateTable(
@@ -161,7 +161,7 @@ namespace FoodOrder.Migrations
                     })
                 .PrimaryKey(t => new { t.MenuItem_Id, t.AddOn_Id })
                 .ForeignKey("dbo.MenuItems", t => t.MenuItem_Id, cascadeDelete: true)
-                .ForeignKey("dbo.AddOns", t => t.AddOn_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AddOns", t => t.AddOn_Id, cascadeDelete: false)
                 .Index(t => t.MenuItem_Id)
                 .Index(t => t.AddOn_Id);
             
@@ -169,14 +169,14 @@ namespace FoodOrder.Migrations
                 "dbo.IngredientMenuItems",
                 c => new
                     {
-                        Ingredient_Id = c.Int(nullable: false),
                         MenuItem_Id = c.Int(nullable: false),
+                        Ingredient_Id = c.Int(nullable: false)
                     })
-                .PrimaryKey(t => new { t.Ingredient_Id, t.MenuItem_Id })
-                .ForeignKey("dbo.Ingredients", t => t.Ingredient_Id, cascadeDelete: true)
+                .PrimaryKey(t => new { t.MenuItem_Id, t.Ingredient_Id })
                 .ForeignKey("dbo.MenuItems", t => t.MenuItem_Id, cascadeDelete: true)
-                .Index(t => t.Ingredient_Id)
-                .Index(t => t.MenuItem_Id);
+                .ForeignKey("dbo.Ingredients", t => t.Ingredient_Id, cascadeDelete: true)
+                .Index(t => t.MenuItem_Id)
+                .Index(t => t.Ingredient_Id);
             
             CreateTable(
                 "dbo.OrderMenuItems",
@@ -196,9 +196,9 @@ namespace FoodOrder.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.AddOns", "SubcategoryId", "dbo.Subcategories");
             DropForeignKey("dbo.MenuItems", "SubcategoryId", "dbo.Subcategories");
             DropForeignKey("dbo.Subcategories", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.AddOns", "SubcategoryId", "dbo.Subcategories");
             DropForeignKey("dbo.Orders", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");

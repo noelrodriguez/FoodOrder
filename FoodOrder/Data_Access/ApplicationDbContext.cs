@@ -27,12 +27,5 @@ namespace FoodOrder.Data_Access
         public DbSet<Ingredient> Ingredient { get; set; }
         public DbSet<AddOn> AddOn { get; set; }
         public DbSet<Order> Order { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<AddOn>().HasRequired(x => x.Subcategory).WithMany(w => w.AddOns).
-                HasForeignKey(f => f.SubcategoryId).WillCascadeOnDelete(false);
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

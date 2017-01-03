@@ -13,7 +13,7 @@ namespace FoodOrder.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201701022351118_Initial"; }
+            get { return "201701031841524_Initial"; }
         }
         
         string IMigrationMetadata.Source

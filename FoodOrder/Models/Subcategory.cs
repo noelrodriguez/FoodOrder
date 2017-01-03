@@ -6,11 +6,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FoodOrder.Models
 {
-    public class Category
+    public class Subcategory
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Subcategory> Subcategories { get; set; }
+        [Required]
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+        public List<MenuItem> MenuItems { get; set; }
+        public List<AddOn> AddOns { get; set; }
     }
 }

@@ -22,7 +22,10 @@ namespace FoodOrder.Data_Access
         }
 
         public DbSet<Category> Category { get; set; }
-        public DbSet<Ingredients> Ingredients { get; set; }
-        public DbSet<AddOns> AddOns { get; set; }
+        public DbSet<Subcategory> Subcategory { get; set; }
+        public DbSet<MenuItem> MenuItem { get; set; }
+        public DbSet<Ingredient> Ingredient { get; set; }
+        public DbSet<AddOn> AddOn { get; set; }
+        public DbSet<Order> Order { get; set; }
     }
 }

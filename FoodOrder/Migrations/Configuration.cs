@@ -21,16 +21,50 @@ namespace FoodOrder.Migrations
             //  to avoid creating duplicate seed data. E.g.
             //
 
+            // Ingredients
+            var I1 = new Models.Ingredient { Name = "Tomatoe", Option = Models.Option.Normal };
+            var I2 = new Models.Ingredient { Name = "Lettuce", Option = Models.Option.Normal };
+            var I3 = new Models.Ingredient { Name = "Mayo", Option = Models.Option.Normal };
+            List<Models.Ingredient> Ingredients = new List<Models.Ingredient>();
+            Ingredients.Add(I1);
+            Ingredients.Add(I2);
+            Ingredients.Add(I3);
 
-            /*Models.MenuItem CowboyBurger = new Models.MenuItem()
+            // Category
+            Models.Category Entrees = new Models.Category()
+            {
+                Name = "Entrees",
+            };
+
+            // Subcategories
+            var S1 = new Models.Subcategory { Name = "Burgers", Category = Entrees };
+            var S2 = new Models.Subcategory { Name = "Wraps", Category = Entrees };
+            List <Models.Subcategory> EntreesSub = new List<Models.Subcategory>();
+            EntreesSub.Add(S1);
+            EntreesSub.Add(S2);
+
+            // Insert subcategories into category
+            Entrees.Subcategories = EntreesSub;
+
+            // MenuItem
+            Models.MenuItem CowboyBurger = new Models.MenuItem()
             {
                 Name = "Cowboy Burger",
                 Description = "...",
-                Price = 9.99
+                Price = 9.99,
+                Ingredients = Ingredients,
+                Subcategory = S1
             };
 
-            
+            //context.Category.AddOrUpdate(x => x.Id, Entrees);
+            //context.MenuItem.AddOrUpdate(x => x.Id, CowboyBurger);
+            //context.SaveChanges();
+            //Models.Subcategory stl = context.Subcategory.Where(x => x.Id == 9).FirstOrDefault<Models.Subcategory>();
+            //context.Entry(stl).State = System.Data.Entity.EntityState.Deleted;
+            //context.SaveChanges();
 
+            
+            /*
             Models.Category Appetizer = new Models.Category();
             Appetizer.Name = "Appetizer";
             Appetizer.Description = "Smaller Servings";
